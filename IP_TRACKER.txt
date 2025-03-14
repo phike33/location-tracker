@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IP Location Tracker</title>
+</head>
+<body>
+    <h1>IP-Based Location Tracker</h1>
+    <p>Your location details:</p>
+    <p id="location">Fetching location...</p>
+
+    <script>
+        fetch("https://ipinfo.io/json?token=b40d7bd8e6febf") 
+        .then(response => response.json())
+        .then(data => {
+            let loc = data.loc.split(",");
+            document.getElementById("location").innerHTML =
+                "IP Address: " + data.ip + "<br>" +
+                "City: " + data.city + "<br>" +
+                "Region: " + data.region + "<br>" +
+                "Country: " + data.country + "<br>" +
+                "Latitude: " + loc[0] + "<br>" +
+                "Longitude: " + loc[1];
+        })
+        .catch(error => {
+            document.getElementById("location").innerHTML = "Could not get location.";
+        });
+    </script>
+</body>
+</html>
